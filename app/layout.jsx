@@ -1,19 +1,15 @@
-import "@styles/globals.css";
-
 export const metadata = {
-  title: "Attendance report",
-  description: "Reporting all attend employee",
+  title: "Dashboard",
+  description: "Dashboard",
 };
 
-const RootLayout = ({ children }) => {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header></header>
-        <main>{children}</main>
+        {children}
+        <footer>footer dashbhoard</footer>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

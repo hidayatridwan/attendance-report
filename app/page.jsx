@@ -1,9 +1,3 @@
-const Page = () => {
-  return (
-    <section>
-      <h1>Hello world</h1>
-    </section>
-  );
-};
-
-export default Page;
+export default function Dashboard() {
+  return <h2>Dashboard</h2>;
+}
