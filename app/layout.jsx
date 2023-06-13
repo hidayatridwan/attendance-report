@@ -1,15 +1,16 @@
+import "@styles/globals.css";
+
 export const metadata = {
-  title: "Dashboard",
-  description: "Dashboard",
+  title: "Login",
+  description: "Login",
 };
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body>
-        {children}
-        <footer>footer dashbhoard</footer>
-      </body>
+      <body>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;
