@@ -7,9 +7,7 @@ const Karyawan = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `https://test.gwenza.com/public/karyawan?period=2023-06`
-      );
+      const response = await fetch("https://test.gwenza.com/public/karyawan");
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
