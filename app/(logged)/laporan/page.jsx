@@ -1,7 +1,12 @@
-import React from "react";
+import Laporan from "@components/Laporan";
 
 const Page = () => {
-  return <div>Page</div>;
+  return (
+    <section className="main-container">
+      <h1 className="main__title">Laporan</h1>
+      <Laporan />
+    </section>
+  );
 };
 
 export default Page;

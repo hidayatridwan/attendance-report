@@ -7,7 +7,11 @@ const Karyawan = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://test.gwenza.com/public/karyawan");
+      const response = await fetch("https://test.gwenza.com/public/karyawan", {
+        headers: {
+          "x-api-key": "QoaUmKyg60wWQl1LVkKi",
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
