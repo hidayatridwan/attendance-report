@@ -208,3 +208,7 @@ header {
 .table td:last-child {
   text-align: center;
 }
+
+.w-50 {
+  width: 50px;
+}

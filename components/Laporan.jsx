@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+const arrMonthName = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+
 const Laporan = () => {
   const [data, setData] = useState([]);
   const [month, setMonth] = useState("");
-  const [maxDate, setMaxDate] = useState(0);
-  const [cols, setCols] = useState([]);
+  const [dates, setDates] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,17 +26,15 @@ const Laporan = () => {
       setData(data);
 
       const initialMonth = new Date(data[0].jamDatang).getMonth();
-      setMonth(initialMonth);
+      setMonth(arrMonthName[initialMonth]);
 
       const arrDates = data.map((val) => new Date(val.jamDatang).getDate());
-      setMaxDate(Math.max(...arrDates));
-
-      let c = [];
-      for (let a = 0; a < maxDate; a++) {
-        c.push(<th key={a}>{a}</th>);
+      const maxDate = Math.max(...arrDates);
+      let no = [];
+      for (let i = 1; i <= maxDate; i++) {
+        no.push(i);
       }
-      setCols(c);
-      console.log(c);
+      setDates(no);
     };
 
     fetchData();
@@ -52,9 +51,13 @@ const Laporan = () => {
             <th rowSpan={2}>Nama</th>
             <th rowSpan={2}>Divisi</th>
             <th rowSpan={2}>Jabatan</th>
-            <th colSpan={maxDate}>{month}</th>
+            <th colSpan={dates.length}>{month}</th>
           </tr>
-          <tr>{cols}</tr>
+          <tr>
+            {
+              dates.map(row => <th key={row} className="w-50">{row}</th>)
+            }
+          </tr>
         </thead>
         <tbody>
           {data.map((row, idx) => (
