@@ -193,7 +193,7 @@ header {
 }
 
 .table th {
-  text-align: -webkit-match-parent;
+  /* text-align: -webkit-match-parent; */
   border-bottom: 1px solid var(--clr-grey);
 }
 
@@ -211,4 +211,5 @@ header {
 
 .w-50 {
   width: 50px;
+  text-align: center;
 }

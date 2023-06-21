@@ -23,7 +23,32 @@ const Laporan = () => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      setData(data);
+
+      let arrUsers = [];
+      data.forEach(row => {
+        const exists = arrUsers.some(obj => obj.nik === row.nik);
+
+        if (!exists) {
+          arrUsers.push(row);
+        }
+      });
+
+      arrUsers.forEach(row => {
+        const dataFiltered = data.filter(obj => obj.nik === row.nik);
+        let arrAbsen = [];
+        dataFiltered.forEach(row2 => {
+          arrAbsen.push({
+            tgl: new Date(row2.jamDatang).getDate(),
+            jam: new Date(row2.jamDatang).getHours(),
+            menit: new Date(row2.jamDatang).getMinutes(),
+          });
+        });
+        row.absen = arrAbsen;
+      });
+
+      console.log(arrUsers);
+
+      setData(arrUsers);
 
       const initialMonth = new Date(data[0].jamDatang).getMonth();
       setMonth(arrMonthName[initialMonth]);
@@ -67,7 +92,21 @@ const Laporan = () => {
               <td>{row.nama}</td>
               <td>{row.divisi}</td>
               <td>{row.jabatan}</td>
-              <td></td>
+              {
+                dates.map((row2, idx2) => {
+                  const absen = row.absen.filter(abs => abs.tgl === row2);
+
+                  if (absen.length > 0) {
+                    let st = 'H';
+                    if (absen[0].jam >= 8 && absen[0].menit >= 1) {
+                      st = 'T';
+                    }
+                    return (<td key={idx2} className="w-50">{st}</td>);
+                  } else {
+                    return (<td key={idx2} className="w-50">-</td>);
+                  }
+                })
+              }
             </tr>
           ))}
         </tbody>
