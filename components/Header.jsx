@@ -1,10 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
   const pathName = usePathname();
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (!session) {
+      router.replace("/");
+    }
+  }, []);
 
   return (
     <header>
@@ -40,7 +50,7 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav__list-item">
-            <Link href="/login" className="nav__link">
+            <Link href="#" className="nav__link" onClick={() => signOut()}>
               Logout
             </Link>
           </li>
