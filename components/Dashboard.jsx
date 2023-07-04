@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-const Karyawan = () => {
+const Dashboard = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.API_URL}karyawan`, {
+      const response = await fetch(`${process.env.API_URL}kordinat/XXX`, {
         headers: {
           "x-api-key": process.env.API_KEY,
         },
@@ -17,7 +17,7 @@ const Karyawan = () => {
       }
       const data = await response.json();
 
-      setData(data);
+      setData(data.result);
     };
 
     fetchData();
@@ -28,24 +28,18 @@ const Karyawan = () => {
       <thead>
         <tr>
           <th>No</th>
-          <th>NIK</th>
-          <th>Nama</th>
-          <th>JK</th>
-          <th>Divisi</th>
-          <th>Jabatan</th>
-          <th>No HP</th>
+          <th>Location</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
         </tr>
       </thead>
       <tbody>
         {data.map((row, idx) => (
-          <tr key={row.id}>
+          <tr key={idx}>
             <td>{idx + 1}</td>
-            <td>{row.nik}</td>
             <td>{row.nama}</td>
-            <td>{row.jenisKelamin}</td>
-            <td>{row.divisi}</td>
-            <td>{row.jabatan}</td>
-            <td>{row.noHp}</td>
+            <td>{row.lat}</td>
+            <td>{row.lng}</td>
           </tr>
         ))}
       </tbody>
@@ -53,4 +47,4 @@ const Karyawan = () => {
   );
 };
 
-export default Karyawan;
+export default Dashboard;

@@ -9,6 +9,10 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  env: {
+    API_URL: "https://test.gwenza.com/public/",
+    API_KEY: "QoaUmKyg60wWQl1LVkKi",
+  },
 };
 
 module.exports = nextConfig;
