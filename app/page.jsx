@@ -2,17 +2,19 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const Page = () => {
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
   const router = useRouter();
-  // const { data: session } = useSession();
+  const session = useSession();
 
-  // if (session) {
-  //   router.replace("/dashboard");
-  // }
+  useEffect(() => {
+    if (session?.status === 'authenticated') {
+      router.push('/dashboard')
+    }
+  }, [session]);
 
   const submitHandler = async () => {
     const res = await signIn("credentials", {
@@ -21,9 +23,7 @@ const Page = () => {
       redirect: false,
     });
 
-    if (!res.error) {
-      router.replace("/dashboard");
-    } else {
+    if (res.error) {
       alert(res.error);
     }
   };

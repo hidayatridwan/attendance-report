@@ -5,29 +5,20 @@ const handler = NextAuth({
   session: {
     strategy: "jwt",
   },
+  secret: 'asdasd8s7d69a8s7dgasdasd7',
   providers: [
     CredentialsProvider({
-      type: "credentials",
-      name: "Credentials",
-      credentials: {},
+      name: "credentials",
       async authorize(credentials, req) {
         const { username, password } = credentials;
-        if (username === "ridwan" && password === "123") {
-          return { id: "1", name: "ridwan hidayat", username: "ridwan" };
+        if (username === "ridwan" && password === "4377") {
+          return { id: "1", name: "Ridwan Hidayat", username: "ridwan" };
         } else {
           throw new Error("Username or password wrong");
         }
       },
     }),
   ],
-  pages: {
-    signIn: "/",
-  },
-  callbacks: {
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-  },
 });
 
 export { handler as GET, handler as POST };
