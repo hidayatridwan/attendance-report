@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 const arrMonthName = [
   "Januari",
@@ -21,6 +22,7 @@ const Laporan = ({ dateFilter }) => {
   const [data, setData] = useState([]);
   const [month, setMonth] = useState("");
   const [dates, setDates] = useState([]);
+  const tableRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,57 +79,66 @@ const Laporan = ({ dateFilter }) => {
   }, [dateFilter]);
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th rowSpan={2}>No</th>
-          <th rowSpan={2}>NIK</th>
-          <th rowSpan={2}>Nama</th>
-          <th rowSpan={2}>Divisi</th>
-          <th rowSpan={2}>Jabatan</th>
-          <th colSpan={dates.length}>{month}</th>
-        </tr>
-        <tr>
-          {dates.map((row) => (
-            <th key={row} className="w-50">
-              {row}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, idx) => (
-          <tr key={idx}>
-            <td>{idx + 1}</td>
-            <td>{row.nik}</td>
-            <td>{row.nama}</td>
-            <td>{row.divisi}</td>
-            <td>{row.jabatan}</td>
-            {dates.map((row2, idx2) => {
-              const absen = row.absen.filter((abs) => abs.tgl === row2);
-
-              if (absen.length > 0) {
-                let st = "H";
-                if (absen[0].jam >= 8 && absen[0].menit >= 1) {
-                  st = "T";
-                }
-                return (
-                  <td key={idx2} className="w-50">
-                    {st}
-                  </td>
-                );
-              } else {
-                return (
-                  <td key={idx2} className="w-50">
-                    -
-                  </td>
-                );
-              }
-            })}
+    <>
+      <DownloadTableExcel
+        filename="Attendance Report"
+        sheet="Report"
+        currentTableRef={tableRef.current}
+      >
+        <button>Export</button>
+      </DownloadTableExcel>
+      <table className="table" ref={tableRef}>
+        <thead>
+          <tr>
+            <th rowSpan={2}>No</th>
+            <th rowSpan={2}>NIK</th>
+            <th rowSpan={2}>Nama</th>
+            <th rowSpan={2}>Divisi</th>
+            <th rowSpan={2}>Jabatan</th>
+            <th colSpan={dates.length}>{month}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+          <tr>
+            {dates.map((row) => (
+              <th key={row} className="w-50">
+                {row}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, idx) => (
+            <tr key={idx}>
+              <td>{idx + 1}</td>
+              <td>{row.nik}</td>
+              <td>{row.nama}</td>
+              <td>{row.divisi}</td>
+              <td>{row.jabatan}</td>
+              {dates.map((row2, idx2) => {
+                const absen = row.absen.filter((abs) => abs.tgl === row2);
+
+                if (absen.length > 0) {
+                  let st = "H";
+                  if (absen[0].jam >= 8 && absen[0].menit >= 1) {
+                    st = "T";
+                  }
+                  return (
+                    <td key={idx2} className="w-50">
+                      {st}
+                    </td>
+                  );
+                } else {
+                  return (
+                    <td key={idx2} className="w-50">
+                      -
+                    </td>
+                  );
+                }
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
