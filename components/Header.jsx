@@ -1,11 +1,20 @@
 "use client";
 
-import { signOut } from "next-auth/react";
+import { useEffect } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const Header = () => {
   const pathName = usePathname();
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session?.status !== "authenticated") {
+      router.push("/");
+    }
+  }, [session]);
 
   return (
     <header>
@@ -17,8 +26,9 @@ const Header = () => {
           <li className="nav__list-item">
             <Link
               href="/dashboard"
-              className={`nav__link ${pathName == "/dashboard" ? "active" : ""
-                }`}
+              className={`nav__link ${
+                pathName == "/dashboard" ? "active" : ""
+              }`}
             >
               Home
             </Link>
