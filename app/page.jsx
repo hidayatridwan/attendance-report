@@ -2,7 +2,7 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const Page = () => {
@@ -10,6 +10,7 @@ const Page = () => {
   const passwordInputRef = useRef();
   const router = useRouter();
   const session = useSession();
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
@@ -18,6 +19,7 @@ const Page = () => {
   }, [session]);
 
   const submitHandler = async () => {
+    setDisabled(true);
     const res = await signIn("credentials", {
       username: usernameInputRef.current.value,
       password: passwordInputRef.current.value,
@@ -25,6 +27,7 @@ const Page = () => {
     });
 
     if (res.error) {
+      setDisabled(false);
       toast.error(res.error);
     }
   };
@@ -50,8 +53,13 @@ const Page = () => {
           className="login__input"
           ref={passwordInputRef}
         />
-        <button type="button" className="login__button" onClick={submitHandler}>
-          Login
+        <button
+          type="button"
+          className="login__button"
+          onClick={submitHandler}
+          disabled={disabled}
+        >
+          {disabled ? "Loading..." : "Login"}
         </button>
       </main>
     </div>
