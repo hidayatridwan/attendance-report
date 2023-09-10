@@ -10,8 +10,10 @@ const nextConfig = {
     appDir: true,
   },
   env: {
-    API_URL: "https://test.gwenza.com/public/",
+    API_URL: "http://localhost:8000/",
     API_KEY: "QoaUmKyg60wWQl1LVkKi",
+    LOGIN_USERNAME: "ridwan",
+    LOGIN_PASSWORD: "4377",
   },
 };
 

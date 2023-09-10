@@ -42,7 +42,11 @@ body {
   font-size: 0.9rem;
   font-weight: var(--fw-normal);
   letter-spacing: 1px;
-  line-height: 1.5;
+}
+
+/* UTILITY */
+.loading {
+  text-align: center;
 }
 
 /* LOGIN */
@@ -193,7 +197,6 @@ header {
 }
 
 .table th {
-  /* text-align: -webkit-match-parent; */
   border-bottom: 1px solid var(--clr-grey);
 }
 

@@ -1,4 +1,5 @@
 import Provider from "@components/Provider";
+import ToastProvider from "@providers/toast-provider";
 import "@styles/globals.css";
 
 export const metadata = {
@@ -10,7 +11,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <Provider>{children}</Provider>
+        <Provider>
+          <ToastProvider />
+          {children}
+        </Provider>
       </body>
     </html>
   );

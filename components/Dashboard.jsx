@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const Dashboard = () => {
+const Dashboard = ({ kordinat }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -20,8 +20,10 @@ const Dashboard = () => {
       setData(data.result);
     };
 
-    fetchData();
-  }, []);
+    setTimeout(() => {
+      fetchData();
+    }, 2000);
+  }, [kordinat]);
 
   return (
     <table className="table">
@@ -35,7 +37,7 @@ const Dashboard = () => {
       </thead>
       <tbody>
         {data.map((row, idx) => (
-          <tr key={idx}>
+          <tr key={row.id}>
             <td>{idx + 1}</td>
             <td>{row.nama}</td>
             <td>{row.lat}</td>

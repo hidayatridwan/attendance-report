@@ -3,6 +3,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const usernameInputRef = useRef();
@@ -11,8 +12,8 @@ const Page = () => {
   const session = useSession();
 
   useEffect(() => {
-    if (session?.status === 'authenticated') {
-      router.push('/dashboard')
+    if (session?.status === "authenticated") {
+      router.push("/dashboard");
     }
   }, [session]);
 
@@ -24,7 +25,7 @@ const Page = () => {
     });
 
     if (res.error) {
-      alert(res.error);
+      toast.error(res.error);
     }
   };
 
