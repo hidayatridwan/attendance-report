@@ -34,6 +34,7 @@ const Karyawan = () => {
           <th>Divisi</th>
           <th>Jabatan</th>
           <th>No HP</th>
+          <th>Tanggal lahir</th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +47,7 @@ const Karyawan = () => {
             <td>{row.divisi}</td>
             <td>{row.jabatan}</td>
             <td>{row.noHp}</td>
+            <td>{row.tanggalLahir}</td>
           </tr>
         ))}
       </tbody>
