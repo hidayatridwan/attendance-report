@@ -5,7 +5,7 @@ const nextConfig = {
     appDir: true,
   },
   env: {
-    API_URL: "https://thorough-mayfly-leading.ngrok-free.app/",
+    API_URL: "https://kirania.69.mu/",
     API_KEY: "QoaUmKyg60wWQl1LVkKi",
     LOGIN_USERNAME: "ridwan",
     LOGIN_PASSWORD: "4377",
