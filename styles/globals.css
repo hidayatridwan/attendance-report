@@ -172,6 +172,10 @@ header {
 
 /* MAIN */
 
+.main-container {
+  overflow: auto;
+}
+
 .logged main {
   justify-items: center;
   width: calc(100% - 3rem);
