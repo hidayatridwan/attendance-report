@@ -5,9 +5,9 @@ const nextConfig = {
     appDir: true,
   },
   env: {
-    API_URL: "https://kirania.69.mu/",
+    API_URL: "http://absen-api.69.mu/",
     API_KEY: "QoaUmKyg60wWQl1LVkKi",
-    LOGIN_USERNAME: "ridwan",
+    LOGIN_USERNAME: "admin",
     LOGIN_PASSWORD: "4377",
   },
 };
