@@ -43,6 +43,7 @@ const Page = () => {
         <option value="office">Office</option>
         <option value="home">Home</option>
         <option value="sttb">STTB</option>
+        <option value="waizly">Graha POS</option>
       </select>
       <Dashboard kordinat={kordinat} />
     </section>
